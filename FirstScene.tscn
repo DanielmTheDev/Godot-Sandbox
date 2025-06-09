@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjlg4csufyera"]
+
+[ext_resource type="Texture2D" uid="uid://d3q6jde53o7p" path="res://ChatGPT Image Jun 8, 2025, 06_32_10 PM.png" id="1_klfix"]
+[ext_resource type="Script" uid="uid://crkc3efsgnuo3" path="res://FirstSprite.cs" id="2_0w2fn"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(886, 569)
+scale = Vector2(0.153023, 0.0992039)
+texture = ExtResource("1_klfix")
+script = ExtResource("2_0w2fn")
