@@ -1,9 +1,13 @@
+using System;
 using Godot;
 
 namespace Sandbox;
 
-public partial class Player : Area2D
+public partial class Shinobi : AnimatedSprite2D
 {
+    private const double AttackDuration = 1.2f;
+    private double _currentAttackElapsed;
+
     [Export]
     public int Speed { get; set; } = 400; // How fast the player will move (pixels/sec).
 
@@ -25,6 +29,7 @@ public partial class Player : Area2D
     {
         ScreenSize = GetViewportRect().Size;
         Hide();
+        Start(new Vector2(ScreenSize.X / 2, ScreenSize.Y / 2));
     }
 
     public void Start(Vector2 position)
@@ -35,6 +40,30 @@ public partial class Player : Area2D
     }
 
     public override void _Process(double delta)
+    {
+        if (IsAttacking(delta))
+        {
+            _currentAttackElapsed += delta;
+            Animation = "attack1";
+        }
+        else
+        {
+            _currentAttackElapsed = 0;
+            ProcessMovement(delta);
+        }
+    }
+
+    private bool IsAttacking(double delta)
+        => Input.IsActionPressed("attack1") || IsCurrentlyInAttackAnimation(delta);
+
+    private bool IsCurrentlyInAttackAnimation(double delta)
+    {
+        var animationStarted = _currentAttackElapsed > 0;
+        var animationInProgress = _currentAttackElapsed + delta < AttackDuration;
+        return animationStarted && animationInProgress;
+    }
+
+    private void ProcessMovement(double delta)
     {
         var velocity = Vector2.Zero; // The player's movement vector.
 
@@ -58,30 +87,26 @@ public partial class Player : Area2D
             velocity.Y -= 1;
         }
 
-        var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
         if (velocity.X != 0)
         {
-            animatedSprite2D.Animation = "walk";
-            animatedSprite2D.FlipV = false;
-            // See the note below about the following boolean assignment.
-            animatedSprite2D.FlipH = velocity.X < 0;
+            Animation = "run";
+            FlipH = velocity.X < 0;
         }
         else if (velocity.Y != 0)
         {
-            animatedSprite2D.Animation = "up";
-            animatedSprite2D.FlipV = velocity.Y > 0;
+            Animation = "run";
         }
 
         if (velocity.Length() > 0)
         {
             velocity = velocity.Normalized() * Speed;
-            animatedSprite2D.Play();
         }
         else
         {
-            animatedSprite2D.Stop();
+            Animation = "idle";
         }
+        Play();
 
         Position += velocity * (float)delta;
         Position = new Vector2(
