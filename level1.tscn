@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://i2npv5ccea5j"]
+
+[ext_resource type="PackedScene" uid="uid://idaaxt2h4m2" path="res://MainCharacter.tscn" id="1_dopym"]
+[ext_resource type="PackedScene" uid="uid://dqbk7xbhb1t75" path="res://floor.tscn" id="2_ootpb"]
+
+[node name="Node" type="Node"]
+
+[node name="MainCharacter" parent="." instance=ExtResource("1_dopym")]
+position = Vector2(170, 51)
+
+[node name="World" parent="." instance=ExtResource("2_ootpb")]
