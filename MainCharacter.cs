@@ -29,6 +29,11 @@ public partial class MainCharacter : CharacterBody2D
         GD.Print("hitbox spawned");
     }
 
+    public void AreaEntered(Area2D area)
+    {
+        GD.Print("area entered");
+    }
+
     private void OnAnimationFinished(StringName animName)
     {
         if (animName == "attack1")
