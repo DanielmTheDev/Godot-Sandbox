@@ -24,6 +24,11 @@ public partial class MainCharacter : CharacterBody2D
         ProcessMovement(delta);
     }
 
+    public void Attack1Hitbox()
+    {
+        GD.Print("hitbox spawned");
+    }
+
     private void OnAnimationFinished(StringName animName)
     {
         if (animName == "attack1")

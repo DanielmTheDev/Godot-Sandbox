@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://idaaxt2h4m2"]
+[gd_scene load_steps=12 format=3 uid="uid://idaaxt2h4m2"]
 
 [ext_resource type="Texture2D" uid="uid://dqcjd0fqw2dsd" path="res://Sprite/Idle.png" id="1_li8uu"]
 [ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://MainCharacter.cs" id="1_m1j4b"]
@@ -88,6 +88,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [10]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("attack1hitbox:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_se01g"]
 resource_name = "attack"
@@ -128,6 +140,32 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 0, 5, 6]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.416667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"Attack1Hitbox"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("attack1hitbox:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.416667, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="Animation" id="Animation_r7r43"]
@@ -180,6 +218,10 @@ _data = {
 &"run": SubResource("Animation_r7r43")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_se01g"]
+radius = 7.0
+height = 49.1872
+
 [node name="MainCharacter" type="CharacterBody2D"]
 script = ExtResource("1_m1j4b")
 
@@ -196,3 +238,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_ffy1q")
 }
 autoplay = "idle"
+
+[node name="attack1hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(39, 8)
+rotation = 1.12318
+shape = SubResource("CapsuleShape2D_se01g")
+disabled = true
