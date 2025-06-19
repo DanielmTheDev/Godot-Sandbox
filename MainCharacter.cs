@@ -4,11 +4,35 @@ namespace Sandbox;
 
 public partial class MainCharacter : CharacterBody2D
 {
+    private AnimationPlayer _animPlayer;
+    private static bool _isAttacking;
     private const float Gravity = 1000f;
+
     private const float MoveSpeed = 200f;
+
+    public override void _Ready()
+    {
+        _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        _animPlayer.AnimationFinished += OnAnimationFinished;
+    }
+
+    private void OnAnimationFinished(StringName animName)
+    {
+        if (animName == "attack1")
+        {
+            _isAttacking = false;
+            _animPlayer.Play("idle");
+        }
+    }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (Input.IsActionJustPressed("attack1") && IsOnFloor())
+        {
+            _isAttacking = true;
+            _animPlayer.Play("attack1");
+            return;
+        }
         SetVelocity(delta);
         MoveAndSlide();
     }
@@ -27,6 +51,11 @@ public partial class MainCharacter : CharacterBody2D
 
     private static float GetXMovement()
     {
+        if (_isAttacking)
+        {
+            return 0;
+        }
+
         var raw = Input.IsActionPressed("move_right")
             ? 1
             : Input.IsActionPressed("move_left")
