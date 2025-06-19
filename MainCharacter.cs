@@ -5,6 +5,7 @@ namespace Sandbox;
 public partial class MainCharacter : CharacterBody2D
 {
     private AnimationPlayer _animPlayer;
+    private Sprite2D _sprite;
     private static bool _isAttacking;
     private const float Gravity = 1000f;
 
@@ -12,8 +13,15 @@ public partial class MainCharacter : CharacterBody2D
 
     public override void _Ready()
     {
+        _sprite = GetNode<Sprite2D>("Sprite2D");
         _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _animPlayer.AnimationFinished += OnAnimationFinished;
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        ProcessAttack();
+        ProcessMovement(delta);
     }
 
     private void OnAnimationFinished(StringName animName)
@@ -23,12 +31,6 @@ public partial class MainCharacter : CharacterBody2D
             _isAttacking = false;
             _animPlayer.Play("idle");
         }
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        ProcessAttack();
-        ProcessMovement(delta);
     }
 
     private void ProcessAttack()
@@ -44,9 +46,32 @@ public partial class MainCharacter : CharacterBody2D
     {
         var x = GetXMovement();
         var y = GetYMovement(delta);
+        _sprite.FlipH = GetOrientation(x);
+        SetMovementAnimation(x);
         Velocity = new Vector2(x, y);
         MoveAndSlide();
     }
+
+    private void SetMovementAnimation(float x)
+    {
+        if (x != 0)
+        {
+            _animPlayer.Play("run");
+        }
+
+        if (x == 0 && !_isAttacking)
+        {
+            _animPlayer.Play("idle");
+        }
+    }
+
+    private bool GetOrientation(float x)
+        => x switch
+        {
+            > 0 => false,
+            < 0 => true,
+            _ => _sprite.FlipH
+        };
 
     private float GetYMovement(double delta)
         => Velocity.Y + (!IsOnFloor()
