@@ -27,21 +27,25 @@ public partial class MainCharacter : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        ProcessAttack();
+        ProcessMovement(delta);
+    }
+
+    private void ProcessAttack()
+    {
         if (Input.IsActionJustPressed("attack1") && IsOnFloor())
         {
             _isAttacking = true;
             _animPlayer.Play("attack1");
-            return;
         }
-        SetVelocity(delta);
-        MoveAndSlide();
     }
 
-    private void SetVelocity(double delta)
+    private void ProcessMovement(double delta)
     {
         var x = GetXMovement();
         var y = GetYMovement(delta);
         Velocity = new Vector2(x, y);
+        MoveAndSlide();
     }
 
     private float GetYMovement(double delta)
