@@ -51,11 +51,13 @@ public partial class MainCharacter : CharacterBody2D
 
     private static float GetXMovement()
     {
-        if (_isAttacking)
-        {
-            return 0;
-        }
+        return _isAttacking
+            ? 0
+            : CalculateWalking();
+    }
 
+    private static float CalculateWalking()
+    {
         var raw = Input.IsActionPressed("move_right")
             ? 1
             : Input.IsActionPressed("move_left")
