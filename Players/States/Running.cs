@@ -37,7 +37,6 @@ public sealed class Running : State
         _sprite.FlipH = GetOrientation(x);
         _animPlayer.Play("run");
         character.Velocity = new Vector2(x, character.Velocity.Y);
-        character.MoveAndSlide();
     }
 
     private static float GetXMovement()

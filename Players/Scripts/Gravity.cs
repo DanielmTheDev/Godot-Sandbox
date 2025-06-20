@@ -10,12 +10,8 @@ public partial class Gravity : Node
 
     public override void _PhysicsProcess(double delta)
     {
-        MainCharacter.Velocity = new Vector2(MainCharacter.Velocity.X, GetYMovement(delta));
+        var force = MainCharacter.Velocity.Y + GravityForce * (float)delta;
+        MainCharacter.Velocity = new Vector2(MainCharacter.Velocity.X, force);
         MainCharacter.MoveAndSlide();
     }
-
-    private float GetYMovement(double delta)
-        => MainCharacter.Velocity.Y + (!MainCharacter.IsOnFloor()
-            ? GravityForce * (float)delta
-            : 0);
 }
