@@ -1,10 +1,10 @@
 using Godot;
+using Sandbox.Players.Controls;
 
 namespace Sandbox.Players.States;
 
 public sealed class Run : State
 {
-    private const float MoveSpeed = 200f;
     private readonly AnimationPlayer _animPlayer;
     private readonly Sprite2D _sprite;
 
@@ -31,27 +31,21 @@ public sealed class Run : State
 
         else if (!(Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right")))
         {
+            character.Velocity = new Vector2(0, character.Velocity.Y);
             character.SwitchState(StateName.Idle);
+        }
+        else
+        {
             ProcessMovement(character);
         }
     }
 
     private void ProcessMovement(Scripts.MainCharacter character)
     {
-        var x = GetXMovement();
+        var x = Movement.GetX();
         _sprite.FlipH = GetOrientation(x);
         _animPlayer.Play("run");
         character.Velocity = new Vector2(x, character.Velocity.Y);
-    }
-
-    private static float GetXMovement()
-    {
-        var raw = Input.IsActionPressed("move_right")
-            ? 1
-            : Input.IsActionPressed("move_left")
-                ? -1
-                : 0;
-        return raw * MoveSpeed;
     }
 
     private bool GetOrientation(float x)

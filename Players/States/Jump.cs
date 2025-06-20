@@ -1,4 +1,5 @@
 using Godot;
+using Sandbox.Players.Controls;
 
 namespace Sandbox.Players.States;
 
@@ -6,6 +7,7 @@ public sealed class Jump : State
 {
     private const float JumpVelocity = -400f;
     private readonly AnimationPlayer _animPlayer;
+    private const float MoveSpeed = 200f;
 
     public Jump(AnimationPlayer animPlayer)
     {
@@ -14,21 +16,23 @@ public sealed class Jump : State
 
     public override void Enter(Scripts.MainCharacter character)
     {
-        // Set initial upward velocity
         character.Velocity = new Vector2(character.Velocity.X, JumpVelocity);
-        _animPlayer.Play("jump");
+        _animPlayer.Play("up");
     }
 
     public override void Update(Scripts.MainCharacter character, double delta)
     {
-        // Optional: horizontal air control
-        var x = Input.IsActionPressed("move_right") ? 1 :
-            Input.IsActionPressed("move_left") ? -1 : 0;
-
-        character.Velocity = new Vector2(x * 200, character.Velocity.Y);
-
-        // Transition when landing
         if (character.IsOnFloor())
+        {
             character.SwitchState(StateName.Idle);
+        }
+
+        var x = Movement.GetX();
+        if (character.Velocity.Y > 0)
+        {
+            _animPlayer.Play("down");
+        }
+
+        character.Velocity = new Vector2(x * MoveSpeed, character.Velocity.Y);
     }
 }
