@@ -20,8 +20,9 @@ public partial class MainCharacter : CharacterBody2D
         _states = new Dictionary<StateName, State>
         {
             { StateName.Idle, new Idle(_animPlayer) },
-            { StateName.Running, new Running(_animPlayer, _sprite) },
-            { StateName.Attacking, new Attack(_animPlayer, this) }
+            { StateName.Running, new Run(_animPlayer, _sprite) },
+            { StateName.Attacking, new Attack(_animPlayer, this) },
+            { StateName.Jumping, new Jump(_animPlayer) }
         };
 
         SwitchState(StateName.Idle);

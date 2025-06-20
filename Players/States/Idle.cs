@@ -19,6 +19,10 @@ public sealed class Idle : State
         {
             character.SwitchState(StateName.Attacking);
         }
+        else if (Input.IsActionJustPressed("jump") && character.IsOnFloor())
+        {
+            character.SwitchState(StateName.Jumping);
+        }
         else if (Input.IsActionPressed("move_left") || Input.IsActionPressed("move_right"))
         {
             character.SwitchState(StateName.Running);

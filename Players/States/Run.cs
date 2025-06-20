@@ -2,13 +2,13 @@ using Godot;
 
 namespace Sandbox.Players.States;
 
-public sealed class Running : State
+public sealed class Run : State
 {
     private const float MoveSpeed = 200f;
     private readonly AnimationPlayer _animPlayer;
     private readonly Sprite2D _sprite;
 
-    public Running(AnimationPlayer animPlayer, Sprite2D sprite)
+    public Run(AnimationPlayer animPlayer, Sprite2D sprite)
     {
         _animPlayer = animPlayer;
         _sprite = sprite;
@@ -19,7 +19,12 @@ public sealed class Running : State
 
     public override void Update(Scripts.MainCharacter character, double delta)
     {
-        if (Input.IsActionJustPressed("attack1") && character.IsOnFloor())
+        if (Input.IsActionJustPressed("jump") && character.IsOnFloor())
+        {
+            character.SwitchState(StateName.Jumping);
+        }
+
+        else if (Input.IsActionJustPressed("attack1") && character.IsOnFloor())
         {
             character.SwitchState(StateName.Attacking);
         }

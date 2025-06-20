@@ -4,5 +4,6 @@ public enum StateName
 {
     Idle,
     Attacking,
-    Running
+    Running,
+    Jumping
 }
