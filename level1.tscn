@@ -9,7 +9,17 @@
 [node name="MainCharacter" parent="." instance=ExtResource("1_dopym")]
 position = Vector2(170, 51)
 
-[node name="World" parent="." instance=ExtResource("2_ootpb")]
+[node name="Floor" parent="." instance=ExtResource("2_ootpb")]
+position = Vector2(220, 261)
 
-[node name="CollisionShape2D" parent="." instance=ExtResource("3_ootpb")]
-position = Vector2(290, 99)
+[node name="RightPlatform" parent="." instance=ExtResource("2_ootpb")]
+position = Vector2(110, 180)
+scale = Vector2(0.240002, 0.2)
+
+[node name="LeftPlatform" parent="." instance=ExtResource("2_ootpb")]
+position = Vector2(360, 180)
+scale = Vector2(0.240002, 0.2)
+
+[node name="Dummy" parent="." instance=ExtResource("3_ootpb")]
+position = Vector2(386, 136)
+scale = Vector2(0.6, 0.698528)

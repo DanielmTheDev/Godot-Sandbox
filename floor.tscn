@@ -3,20 +3,18 @@
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ryoud"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lgp48"]
-size = Vector2(520.5, 34)
+size = Vector2(529.25, 34)
 
-[node name="World" type="Node"]
-
-[node name="Floor" type="StaticBody2D" parent="."]
+[node name="Floor" type="StaticBody2D"]
 material = SubResource("CanvasItemMaterial_ryoud")
-position = Vector2(224, 184)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
-position = Vector2(30, 5)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(35, 72)
+scale = Vector2(1, 4.92)
 shape = SubResource("RectangleShape2D_lgp48")
 debug_color = Color(0.941004, 0.152863, 0.478645, 0.42)
 
-[node name="ColorRect" type="ColorRect" parent="Floor"]
+[node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -230.0
 offset_top = -12.0
 offset_right = -190.0
