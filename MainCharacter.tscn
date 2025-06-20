@@ -1,11 +1,11 @@
 [gd_scene load_steps=14 format=3 uid="uid://idaaxt2h4m2"]
 
+[ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/Scripts/MainCharacter.cs" id="1_fhkga"]
 [ext_resource type="Texture2D" uid="uid://dqcjd0fqw2dsd" path="res://Sprite/Idle.png" id="1_li8uu"]
-[ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/MainCharacter.cs" id="1_se01g"]
 [ext_resource type="Texture2D" uid="uid://bq0qlrgi6htbd" path="res://Sprite/Attack1.png" id="3_ffy1q"]
 [ext_resource type="Texture2D" uid="uid://b33jtq1olwb6h" path="res://Sprite/Run.png" id="4_se01g"]
-[ext_resource type="Script" uid="uid://bei6tl5ussl8a" path="res://Players/Gravity.cs" id="5_r7r43"]
-[ext_resource type="Script" uid="uid://bcrva5pck7viw" path="res://Players/Attacking.cs" id="6_fhkga"]
+[ext_resource type="Script" uid="uid://bei6tl5ussl8a" path="res://Players/Scripts/Gravity.cs" id="5_a131d"]
+[ext_resource type="Script" uid="uid://bcrva5pck7viw" path="res://Players/Scripts/Attacking.cs" id="6_sjmh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1j4b"]
 size = Vector2(36, 41)
@@ -93,7 +93,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("attack1area/attack1hitbox:disabled")
+tracks/3/path = NodePath("Attack1area/Attack1hitbox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -146,7 +146,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("attack1area/attack1hitbox:disabled")
+tracks/3/path = NodePath("Attack1area/Attack1hitbox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -225,7 +225,7 @@ radius = 7.0
 height = 49.1872
 
 [node name="MainCharacter" type="CharacterBody2D"]
-script = ExtResource("1_se01g")
+script = ExtResource("1_fhkga")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_li8uu")
@@ -242,18 +242,18 @@ libraries = {
 autoplay = "idle"
 
 [node name="Gravity" type="Node" parent="." node_paths=PackedStringArray("MainCharacter")]
-script = ExtResource("5_r7r43")
+script = ExtResource("5_a131d")
 MainCharacter = NodePath("..")
 
 [node name="Attacking" type="Node" parent="."]
-script = ExtResource("6_fhkga")
+script = ExtResource("6_sjmh4")
 
-[node name="attack1area" type="Area2D" parent="."]
+[node name="Attack1area" type="Area2D" parent="."]
 
-[node name="attack1hitbox" type="CollisionShape2D" parent="attack1area"]
+[node name="Attack1hitbox" type="CollisionShape2D" parent="Attack1area"]
 position = Vector2(39, 8)
 rotation = 1.12318
 shape = SubResource("CapsuleShape2D_se01g")
 disabled = true
 
-[connection signal="area_entered" from="attack1area" to="Attacking" method="AreaEntered"]
+[connection signal="area_entered" from="Attack1area" to="Attacking" method="AreaEntered"]

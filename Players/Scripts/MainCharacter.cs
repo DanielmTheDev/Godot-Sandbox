@@ -1,14 +1,8 @@
 using System.Collections.Generic;
 using Godot;
+using Sandbox.Players.States;
 
-namespace Sandbox.Players;
-
-public enum StateName
-{
-    Idle,
-    Attacking,
-    Running
-}
+namespace Sandbox.Players.Scripts;
 
 public partial class MainCharacter : CharacterBody2D
 {
@@ -25,9 +19,9 @@ public partial class MainCharacter : CharacterBody2D
 
         _states = new Dictionary<StateName, State>
         {
-            { StateName.Idle, new IdleState(_animPlayer) },
-            { StateName.Running, new RunningState(_animPlayer, _sprite) },
-            { StateName.Attacking, new AttackState(_animPlayer, this) }
+            { StateName.Idle, new Idle(_animPlayer) },
+            { StateName.Running, new Running(_animPlayer, _sprite) },
+            { StateName.Attacking, new Attack(_animPlayer, this) }
         };
 
         SwitchState(StateName.Idle);

@@ -1,23 +1,23 @@
 using Godot;
 
-namespace Sandbox.Players;
+namespace Sandbox.Players.States;
 
-public sealed class RunningState : State
+public sealed class Running : State
 {
     private const float MoveSpeed = 200f;
     private readonly AnimationPlayer _animPlayer;
     private readonly Sprite2D _sprite;
 
-    public RunningState(AnimationPlayer animPlayer, Sprite2D sprite)
+    public Running(AnimationPlayer animPlayer, Sprite2D sprite)
     {
         _animPlayer = animPlayer;
         _sprite = sprite;
     }
 
-    public override void Enter(MainCharacter character)
+    public override void Enter(Scripts.MainCharacter character)
         => ProcessMovement(character);
 
-    public override void Update(MainCharacter character, double delta)
+    public override void Update(Scripts.MainCharacter character, double delta)
     {
         if (Input.IsActionJustPressed("attack1") && character.IsOnFloor())
         {
@@ -31,7 +31,7 @@ public sealed class RunningState : State
         }
     }
 
-    private void ProcessMovement(MainCharacter character)
+    private void ProcessMovement(Scripts.MainCharacter character)
     {
         var x = GetXMovement();
         _sprite.FlipH = GetOrientation(x);

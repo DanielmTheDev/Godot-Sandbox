@@ -1,6 +1,6 @@
 using Godot;
 
-namespace Sandbox.Players;
+namespace Sandbox.Players.Scripts;
 
 public partial class Attacking : Node
 {

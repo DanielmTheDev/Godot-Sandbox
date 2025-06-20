@@ -1,19 +1,19 @@
 using Godot;
 
-namespace Sandbox.Players;
+namespace Sandbox.Players.States;
 
-public sealed class IdleState : State
+public sealed class Idle : State
 {
     private readonly AnimationPlayer _animPlayer;
 
-    public IdleState(AnimationPlayer animPlayer)
+    public Idle(AnimationPlayer animPlayer)
     {
         _animPlayer = animPlayer;
     }
 
-    public override void Enter(MainCharacter character) => _animPlayer.Play("idle");
+    public override void Enter(Scripts.MainCharacter character) => _animPlayer.Play("idle");
 
-    public override void Update(MainCharacter character, double delta)
+    public override void Update(Scripts.MainCharacter character, double delta)
     {
         if (Input.IsActionJustPressed("attack1") && character.IsOnFloor())
         {
