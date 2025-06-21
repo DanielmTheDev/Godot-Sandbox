@@ -28,7 +28,8 @@ public partial class MainCharacter : CharacterBody2D
             { StateName.Idle, new Idle(_animPlayer, _controls) },
             { StateName.Running, new Run(_animPlayer, _sprite, _controls) },
             { StateName.Attacking, new Attack(_animPlayer, this) },
-            { StateName.Jumping, new Jump(_animPlayer, _controls) }
+            { StateName.Jumping, new Jump(_animPlayer, _controls) },
+            { StateName.Dead, new Dead(_animPlayer) }
         };
 
         SwitchState(StateName.Idle);

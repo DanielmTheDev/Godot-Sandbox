@@ -5,5 +5,6 @@ public enum StateName
     Idle,
     Attacking,
     Running,
-    Jumping
+    Jumping,
+    Dead
 }

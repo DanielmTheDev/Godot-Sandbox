@@ -15,11 +15,7 @@ public sealed class Attack : State
         _animPlayer.AnimationFinished += OnAnimationFinished;
     }
 
-    public override void Enter(MainCharacter character)
-    {
-        GD.Print("attacking");
-        _animPlayer.Play("attack1");
-    }
+    public override void Enter(MainCharacter character) => _animPlayer.Play("attack1");
 
     private void OnAnimationFinished(StringName animName)
     {
