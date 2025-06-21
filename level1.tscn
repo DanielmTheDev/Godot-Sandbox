@@ -6,8 +6,12 @@
 
 [node name="Node" type="Node"]
 
-[node name="MainCharacter" parent="." instance=ExtResource("1_dopym")]
+[node name="Player1" parent="." instance=ExtResource("1_dopym")]
 position = Vector2(170, 51)
+
+[node name="Player2" parent="." instance=ExtResource("1_dopym")]
+position = Vector2(339, 50)
+ControlsPrefix = "p2_"
 
 [node name="Floor" parent="." instance=ExtResource("2_ootpb")]
 position = Vector2(220, 261)

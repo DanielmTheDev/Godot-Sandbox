@@ -1,20 +1,21 @@
 using Godot;
+using Sandbox.Players.Scripts;
 
 namespace Sandbox.Players.States;
 
 public sealed class Attack : State
 {
     private readonly AnimationPlayer _animPlayer;
-    private readonly Scripts.MainCharacter _character;
+    private readonly MainCharacter _character;
 
-    public Attack(AnimationPlayer animPlayer, Scripts.MainCharacter character)
+    public Attack(AnimationPlayer animPlayer, MainCharacter character)
     {
         _animPlayer = animPlayer;
         _character = character;
         _animPlayer.AnimationFinished += OnAnimationFinished;
     }
 
-    public override void Enter(Scripts.MainCharacter character)
+    public override void Enter(MainCharacter character)
     {
         GD.Print("attacking");
         _animPlayer.Play("attack1");
