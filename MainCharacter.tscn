@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://idaaxt2h4m2"]
+[gd_scene load_steps=19 format=3 uid="uid://idaaxt2h4m2"]
 
 [ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/Scripts/MainCharacter.cs" id="1_fhkga"]
 [ext_resource type="Texture2D" uid="uid://dqcjd0fqw2dsd" path="res://Sprite/Idle.png" id="1_li8uu"]
@@ -95,7 +95,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Attack1area/Attack1hitbox:disabled")
+tracks/3/path = NodePath("Attack1Area/Attack1Hitbox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -148,7 +148,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Attack1area/Attack1hitbox:disabled")
+tracks/3/path = NodePath("Attack1Area/Attack1Hitbox:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -312,6 +312,9 @@ _data = {
 radius = 7.0
 height = 49.1872
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjmh4"]
+size = Vector2(35, 20)
+
 [node name="MainCharacter" type="CharacterBody2D"]
 script = ExtResource("1_fhkga")
 
@@ -319,7 +322,7 @@ script = ExtResource("1_fhkga")
 texture = ExtResource("1_li8uu")
 hframes = 10
 
-[node name="CharacterShape" type="CollisionShape2D" parent="."]
+[node name="PhysicalShape" type="CollisionShape2D" parent="."]
 position = Vector2(2, -0.5)
 shape = SubResource("RectangleShape2D_m1j4b")
 
@@ -336,12 +339,22 @@ MainCharacter = NodePath("..")
 [node name="Attacking" type="Node" parent="."]
 script = ExtResource("6_sjmh4")
 
-[node name="Attack1area" type="Area2D" parent="."]
+[node name="Attack1Area" type="Area2D" parent="."]
+collision_layer = 2
 
-[node name="Attack1hitbox" type="CollisionShape2D" parent="Attack1area"]
-position = Vector2(39, 8)
+[node name="Attack1Hitbox" type="CollisionShape2D" parent="Attack1Area"]
+position = Vector2(43, 8)
 rotation = 1.12318
+scale = Vector2(1, 0.822568)
 shape = SubResource("CapsuleShape2D_se01g")
 disabled = true
 
-[connection signal="area_entered" from="Attack1area" to="Attacking" method="AreaEntered"]
+[node name="HitArea" type="Area2D" parent="."]
+collision_mask = 0
+
+[node name="HitBox" type="CollisionShape2D" parent="HitArea"]
+position = Vector2(1.5, 0)
+scale = Vector2(1, 2)
+shape = SubResource("RectangleShape2D_sjmh4")
+
+[connection signal="area_entered" from="Attack1Area" to="Attacking" method="AreaEntered"]
