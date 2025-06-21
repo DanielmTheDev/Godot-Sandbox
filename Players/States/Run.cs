@@ -7,13 +7,13 @@ namespace Sandbox.Players.States;
 public sealed class Run : State
 {
     private readonly AnimationPlayer _animPlayer;
-    private readonly Sprite2D _sprite;
+    private readonly Node2D _visuals;
     private readonly InputProfile _controls;
 
-    public Run(AnimationPlayer animPlayer, Sprite2D sprite, InputProfile controls)
+    public Run(AnimationPlayer animPlayer, Node2D visuals, InputProfile controls)
     {
         _animPlayer = animPlayer;
-        _sprite = sprite;
+        _visuals = visuals;
         _controls = controls;
     }
 
@@ -45,17 +45,20 @@ public sealed class Run : State
 
     private void ProcessMovement(MainCharacter character)
     {
-        var x = _controls.GetX();
-        _sprite.FlipH = GetOrientation(x);
+        var xMovement = _controls.GetXMovement();
+        AdjustOrientation(xMovement);
+        character.Velocity = new Vector2(xMovement, character.Velocity.Y);
         _animPlayer.Play("run");
-        character.Velocity = new Vector2(x, character.Velocity.Y);
     }
 
-    private bool GetOrientation(float x)
-        => x switch
+    private void AdjustOrientation(float xMovement)
+    {
+        var scaleX = xMovement switch
         {
-            > 0 => false,
-            < 0 => true,
-            _ => _sprite.FlipH
+            > 0 => 1,
+            < 0 => -1,
+            _ => _visuals.Scale.X
         };
+        _visuals.Scale = new Vector2(scaleX, _visuals.Scale.Y);
+    }
 }

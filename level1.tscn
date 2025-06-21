@@ -6,10 +6,10 @@
 [node name="Node" type="Node"]
 
 [node name="Player1" parent="." instance=ExtResource("1_dopym")]
-position = Vector2(170, 51)
+position = Vector2(117, 124)
 
 [node name="Player2" parent="." instance=ExtResource("1_dopym")]
-position = Vector2(74, 111)
+position = Vector2(364, 129)
 ControlsPrefix = "p2_"
 
 [node name="Floor" parent="." instance=ExtResource("2_ootpb")]

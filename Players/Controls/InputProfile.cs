@@ -15,7 +15,7 @@ public class InputProfile
 
     public InputProfile(string prefix) => _prefix = prefix;
 
-    public float GetX()
+    public float GetXMovement()
     {
         var raw = Input.IsActionPressed(MoveRight)
             ? 1

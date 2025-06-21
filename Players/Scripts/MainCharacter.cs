@@ -11,33 +11,33 @@ public partial class MainCharacter : CharacterBody2D
     public string ControlsPrefix = "p1_";
 
     private AnimationPlayer _animPlayer = null!;
-    private Sprite2D _sprite = null!;
     private InputProfile _controls = null!;
 
     private Dictionary<StateName, State> _states = null!;
     private State _currentState = null!;
+    private Node2D _visuals = null!;
 
     public override void _Ready()
     {
-        _sprite = GetNode<Sprite2D>("Sprite2D");
         _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         _controls = new InputProfile(ControlsPrefix);
+        _visuals = GetNode<Node2D>("Visuals");
 
         _states = new Dictionary<StateName, State>
         {
             { StateName.Idle, new Idle(_animPlayer, _controls) },
-            { StateName.Running, new Run(_animPlayer, _sprite, _controls) },
+            { StateName.Running, new Run(_animPlayer, _visuals, _controls) },
             { StateName.Attacking, new Attack(_animPlayer, this) },
             { StateName.Jumping, new Jump(_animPlayer, _controls) },
             { StateName.Dead, new Dead(_animPlayer) }
         };
-
+        _currentState = _states[StateName.Idle];
         SwitchState(StateName.Idle);
     }
 
     public void SwitchState(StateName name)
     {
-        _currentState?.Exit(this);
+        _currentState.Exit(this);
         _currentState = _states[name];
         _currentState.Enter(this);
     }

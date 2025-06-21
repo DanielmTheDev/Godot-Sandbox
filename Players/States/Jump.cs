@@ -29,7 +29,7 @@ public sealed class Jump : State
             _animPlayer.Play("down");
         }
 
-        character.Velocity = new Vector2(_controls.GetX(), character.Velocity.Y);
+        character.Velocity = new Vector2(_controls.GetXMovement(), character.Velocity.Y);
         if (character.IsOnFloor())
         {
             character.SwitchState(StateName.Idle);
