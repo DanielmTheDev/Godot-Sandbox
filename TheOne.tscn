@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://0pohi0sese8q"]
+
+[ext_resource type="Texture2D" uid="uid://bnkr0fv3v47b" path="res://the_one/spritesheet.png" id="1_ehkj1"]
+
+[sub_resource type="Animation" id="Animation_qy3el"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_ehkj1"]
+resource_name = "idle"
+length = 2.00005
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 1, 0, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [false, false, true, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0o1tl"]
+_data = {
+&"RESET": SubResource("Animation_qy3el"),
+&"idle": SubResource("Animation_ehkj1")
+}
+
+[node name="Sprite2D" type="Sprite2D"]
+texture = ExtResource("1_ehkj1")
+hframes = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0o1tl")
+}
+autoplay = "idle"
