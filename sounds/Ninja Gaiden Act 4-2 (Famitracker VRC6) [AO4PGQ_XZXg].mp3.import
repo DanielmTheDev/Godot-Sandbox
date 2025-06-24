@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://d4nfxqvof0mw0"
+path="res://.godot/imported/Ninja Gaiden Act 4-2 (Famitracker VRC6) [AO4PGQ_XZXg].mp3-ed206c88e234f5dd84ecf5b328a88028.mp3str"
+
+[deps]
+
+source_file="res://sounds/Ninja Gaiden Act 4-2 (Famitracker VRC6) [AO4PGQ_XZXg].mp3"
+dest_files=["res://.godot/imported/Ninja Gaiden Act 4-2 (Famitracker VRC6) [AO4PGQ_XZXg].mp3-ed206c88e234f5dd84ecf5b328a88028.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
