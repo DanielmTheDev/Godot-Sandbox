@@ -353,4 +353,5 @@ tile_set = SubResource("TileSet_v8kj3")
 
 [node name="BackgroundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_v8kj3")
+volume_db = -11.49
 autoplay = true

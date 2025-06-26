@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://idaaxt2h4m2"]
+[gd_scene load_steps=25 format=3 uid="uid://idaaxt2h4m2"]
 
 [ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/Scripts/MainCharacter.cs" id="1_fhkga"]
 [ext_resource type="Texture2D" uid="uid://dqcjd0fqw2dsd" path="res://Sprite/Idle.png" id="1_li8uu"]
@@ -10,6 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://y2fg1ouyp7ds" path="res://Sprite/Death.png" id="7_lsetx"]
 [ext_resource type="Texture2D" uid="uid://cceo3205egua" path="res://images/blood_small.png" id="10_agt6t"]
 [ext_resource type="Script" uid="uid://bdmrvrxgtgyxq" path="res://Players/Scripts/TakingDamage.cs" id="10_mctrd"]
+[ext_resource type="AudioStream" uid="uid://dcoo2qwrrf5vw" path="res://sounds/sword_swing1.mp3" id="11_agt6t"]
+[ext_resource type="AudioStream" uid="uid://cblru0phgdg8w" path="res://sounds/jump.mp3" id="12_uv7sl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m1j4b"]
 size = Vector2(36, 41)
@@ -71,6 +73,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/Strike:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/Jump:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_se01g"]
 resource_name = "attack"
@@ -123,6 +149,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/Strike:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.416667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_uv7sl"]
@@ -333,6 +371,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [3]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/Jump:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ffy1q"]
 _data = {
@@ -411,5 +461,13 @@ texture = ExtResource("10_agt6t")
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_lsetx")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Strike" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("11_agt6t")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("12_uv7sl")
 
 [connection signal="area_entered" from="Visuals/HurtArea" to="TakingDamage" method="GetHit"]
