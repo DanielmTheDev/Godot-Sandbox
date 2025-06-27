@@ -446,13 +446,15 @@ libraries = {
 }
 autoplay = "idle"
 
-[node name="TakingDamage" type="Node" parent="." node_paths=PackedStringArray("MainCharacter")]
-script = ExtResource("10_mctrd")
-MainCharacter = NodePath("..")
+[node name="Logic" type="Node" parent="."]
 
-[node name="Gravity" type="Node" parent="." node_paths=PackedStringArray("MainCharacter")]
+[node name="TakingDamage" type="Node" parent="Logic" node_paths=PackedStringArray("MainCharacter")]
+script = ExtResource("10_mctrd")
+MainCharacter = NodePath("../..")
+
+[node name="Gravity" type="Node" parent="Logic" node_paths=PackedStringArray("MainCharacter")]
 script = ExtResource("5_a131d")
-MainCharacter = NodePath("..")
+MainCharacter = NodePath("../..")
 
 [node name="BloodEmitter" type="GPUParticles2D" parent="."]
 emitting = false
@@ -470,4 +472,4 @@ stream = ExtResource("11_agt6t")
 [node name="Jump" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("12_uv7sl")
 
-[connection signal="area_entered" from="Visuals/HurtArea" to="TakingDamage" method="GetHit"]
+[connection signal="area_entered" from="Visuals/HurtArea" to="Logic/TakingDamage" method="GetHit"]
