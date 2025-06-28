@@ -1,8 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://0pohi0sese8q"]
+[gd_scene load_steps=20 format=3 uid="uid://0pohi0sese8q"]
 
 [ext_resource type="Texture2D" uid="uid://cpyb2f2wlx3lv" path="res://the_one/Idle Animation Var 1 Sprite (horizontal).png" id="1_ehkj1"]
 [ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/Scripts/MainCharacter.cs" id="1_xcwry"]
 [ext_resource type="Script" uid="uid://bei6tl5ussl8a" path="res://Players/Scripts/Gravity.cs" id="2_qy3el"]
+[ext_resource type="Texture2D" uid="uid://byxh2wr4ajbu2" path="res://images/red_square.png" id="3_0aqxv"]
 [ext_resource type="Texture2D" uid="uid://cceo3205egua" path="res://images/blood_small.png" id="3_0o1tl"]
 [ext_resource type="Script" uid="uid://bdmrvrxgtgyxq" path="res://Players/Scripts/TakingDamage.cs" id="4_dr2vk"]
 [ext_resource type="AudioStream" uid="uid://dcoo2qwrrf5vw" path="res://sounds/sword_swing1.mp3" id="5_70clr"]
@@ -32,6 +33,42 @@ tracks/0/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Attack1Area/Attack1Hitbox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Attack1Area/HitboxSprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Sounds/Strike:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_ehkj1"]
 resource_name = "idle"
@@ -51,10 +88,67 @@ tracks/0/keys = {
 "values": [0, 1, 0, 1, 4, 5]
 }
 
+[sub_resource type="Animation" id="Animation_0aqxv"]
+resource_name = "attack1"
+length = 0.750013
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Attack1Area/Attack1Hitbox:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Attack1Area/HitboxSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.375),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Sounds/Strike:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.125),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_rcpus"]
+resource_name = "run"
+step = 0.125
+
+[sub_resource type="Animation" id="Animation_r3sxv"]
+resource_name = "up"
+step = 0.125
+
+[sub_resource type="Animation" id="Animation_q71ue"]
+resource_name = "down"
+step = 0.125
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0o1tl"]
 _data = {
 &"RESET": SubResource("Animation_qy3el"),
-&"idle": SubResource("Animation_ehkj1")
+&"attack1": SubResource("Animation_0aqxv"),
+&"down": SubResource("Animation_q71ue"),
+&"idle": SubResource("Animation_ehkj1"),
+&"run": SubResource("Animation_rcpus"),
+&"up": SubResource("Animation_r3sxv")
 }
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dr2vk"]
@@ -85,11 +179,18 @@ collision_layer = 2
 collision_mask = 0
 
 [node name="Attack1Hitbox" type="CollisionShape2D" parent="Visuals/Attack1Area"]
-position = Vector2(258, -1.99999)
+position = Vector2(299, -23)
 rotation = 1.12318
 scale = Vector2(1.55136, 0.771309)
 shape = SubResource("CapsuleShape2D_xcwry")
 disabled = true
+
+[node name="HitboxSprite" type="Sprite2D" parent="Visuals/Attack1Area"]
+visible = false
+position = Vector2(260, -3.00001)
+rotation = -0.448899
+scale = Vector2(0.158703, 0.0628895)
+texture = ExtResource("3_0aqxv")
 
 [node name="HurtArea" type="Area2D" parent="Visuals"]
 position = Vector2(0, -1)
