@@ -6,5 +6,6 @@ public enum StateName
     Attacking,
     Running,
     Jumping,
-    Dead
+    Dead,
+    Parrying
 }

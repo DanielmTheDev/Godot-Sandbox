@@ -29,6 +29,7 @@ public partial class MainCharacter : CharacterBody2D
             { StateName.Running, new Run(_animPlayer, _visuals, _controls) },
             { StateName.Attacking, new Attack(_animPlayer, this) },
             { StateName.Jumping, new Jump(_animPlayer, _controls) },
+            { StateName.Parrying, new Parry(_animPlayer, this) },
             { StateName.Dead, new Dead(_animPlayer) }
         };
         CurrentState = _states[StateName.Idle];

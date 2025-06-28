@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://0pohi0sese8q"]
+[gd_scene load_steps=23 format=3 uid="uid://0pohi0sese8q"]
 
 [ext_resource type="Texture2D" uid="uid://cpyb2f2wlx3lv" path="res://the_one/Idle Animation Var 1 Sprite (horizontal).png" id="1_ehkj1"]
 [ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/Scripts/MainCharacter.cs" id="1_xcwry"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dcoo2qwrrf5vw" path="res://sounds/sword_swing1.mp3" id="5_70clr"]
 [ext_resource type="Script" uid="uid://bdmrvrxgtgyxq" path="res://Players/Scripts/GettingHit.cs" id="6_0aqxv"]
 [ext_resource type="AudioStream" uid="uid://cblru0phgdg8w" path="res://sounds/jump.mp3" id="6_xcwry"]
+[ext_resource type="AudioStream" uid="uid://142s1ahj30b8" path="res://sounds/parry.mp3" id="9_rcpus"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dr2vk"]
 size = Vector2(32.4324, 381)
@@ -68,6 +69,30 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../HurtArea/ParrySprite:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../HurtArea/ParryArea:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_ehkj1"]
@@ -145,6 +170,35 @@ step = 0.125
 resource_name = "death"
 step = 0.125
 
+[sub_resource type="Animation" id="Animation_8ck82"]
+resource_name = "parry"
+length = 0.750013
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../HurtArea/ParrySprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.625),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../HurtArea/ParryArea:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.625),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0o1tl"]
 _data = {
 &"RESET": SubResource("Animation_qy3el"),
@@ -152,6 +206,7 @@ _data = {
 &"death": SubResource("Animation_ajs1i"),
 &"down": SubResource("Animation_q71ue"),
 &"idle": SubResource("Animation_ehkj1"),
+&"parry": SubResource("Animation_8ck82"),
 &"run": SubResource("Animation_rcpus"),
 &"up": SubResource("Animation_r3sxv")
 }
@@ -208,9 +263,17 @@ scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_0aqxv")
 
 [node name="ParryArea" type="CollisionShape2D" parent="Visuals/HurtArea"]
-position = Vector2(-27, 21)
-scale = Vector2(1, 2)
+position = Vector2(185, 18)
+scale = Vector2(0.520001, 2)
 shape = SubResource("RectangleShape2D_0aqxv")
+disabled = true
+
+[node name="ParrySprite" type="Sprite2D" parent="Visuals/HurtArea"]
+visible = false
+position = Vector2(230, 11)
+rotation = -1.57506
+scale = Vector2(0.158703, 0.0628895)
+texture = ExtResource("3_0aqxv")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Visuals/Sprite2d")
@@ -245,5 +308,8 @@ stream = ExtResource("5_70clr")
 
 [node name="Jump" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("6_xcwry")
+
+[node name="Parry" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("9_rcpus")
 
 [connection signal="area_entered" from="Visuals/HurtArea" to="Logic/TakingDamage" method="GetHit"]

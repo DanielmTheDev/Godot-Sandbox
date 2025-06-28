@@ -12,6 +12,7 @@ public class InputProfile
     public string MoveRight => $"{_prefix}move_right";
     public string Jump => $"{_prefix}jump";
     public string Attack1 => $"{_prefix}attack1";
+    public string Parry => $"{_prefix}parry";
 
     public InputProfile(string prefix) => _prefix = prefix;
 
@@ -24,4 +25,10 @@ public class InputProfile
                 : 0;
         return raw * MoveSpeed;
     }
+
+    public bool AttackJustPressed() => Input.IsActionJustPressed(Attack1);
+    public bool MoveLeftJustPressed() => Input.IsActionJustPressed(MoveLeft);
+    public bool MoveRightJustPressed() => Input.IsActionJustPressed(MoveRight);
+    public bool JumpJustPressed() => Input.IsActionJustPressed(Jump);
+    public bool ParryJustPressed() => Input.IsActionJustPressed(Parry);
 }

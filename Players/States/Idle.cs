@@ -19,17 +19,21 @@ public sealed class Idle : State
 
     public override void Update(MainCharacter character, double delta)
     {
-        if (Input.IsActionJustPressed(_controls.Attack1) && character.IsOnFloor())
+        if (_controls.AttackJustPressed() && character.IsOnFloor())
         {
             character.SwitchState(StateName.Attacking);
         }
-        else if (Input.IsActionJustPressed(_controls.Jump) && character.IsOnFloor())
+        else if (_controls.JumpJustPressed() && character.IsOnFloor())
         {
             character.SwitchState(StateName.Jumping);
         }
-        else if (Input.IsActionPressed(_controls.MoveLeft) || Input.IsActionPressed(_controls.MoveRight))
+        else if (_controls.MoveLeftJustPressed() || _controls.MoveRightJustPressed())
         {
             character.SwitchState(StateName.Running);
+        }
+        else if (_controls.ParryJustPressed() && character.IsOnFloor())
+        {
+            character.SwitchState(StateName.Parrying);
         }
         else
         {
