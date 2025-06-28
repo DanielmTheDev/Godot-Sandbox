@@ -350,5 +350,10 @@ volume_db = -11.49
 autoplay = true
 
 [node name="MainCharacter" parent="." instance=ExtResource("6_crycw")]
-position = Vector2(229, 188)
+position = Vector2(165, 256)
 scale = Vector2(0.1, 0.1)
+
+[node name="MainCharacter2" parent="." instance=ExtResource("6_crycw")]
+position = Vector2(335, 255)
+scale = Vector2(0.1, 0.1)
+ControlsPrefix = "p2_"

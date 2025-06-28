@@ -14,7 +14,7 @@ public partial class MainCharacter : CharacterBody2D
     private InputProfile _controls = null!;
 
     private Dictionary<StateName, State> _states = null!;
-    private State _currentState = null!;
+    public State CurrentState = null!;
     private Node2D _visuals = null!;
 
     public override void _Ready()
@@ -31,16 +31,16 @@ public partial class MainCharacter : CharacterBody2D
             { StateName.Jumping, new Jump(_animPlayer, _controls) },
             { StateName.Dead, new Dead(_animPlayer) }
         };
-        _currentState = _states[StateName.Idle];
+        CurrentState = _states[StateName.Idle];
         SwitchState(StateName.Idle);
     }
 
     public void SwitchState(StateName name)
     {
-        _currentState.Exit(this);
-        _currentState = _states[name];
-        _currentState.Enter(this);
+        CurrentState.Exit(this);
+        CurrentState = _states[name];
+        CurrentState.Enter(this);
     }
 
-    public override void _PhysicsProcess(double delta) => _currentState.Update(this, delta);
+    public override void _PhysicsProcess(double delta) => CurrentState.Update(this, delta);
 }
