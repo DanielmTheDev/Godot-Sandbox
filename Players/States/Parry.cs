@@ -24,11 +24,7 @@ public class Parry : State
 
     public override void Exit(MainCharacter character) => _animPlayer.AnimationFinished -= OnAnimationFinished;
 
-    public override void GetHit(MainCharacter character, Area2D area)
-    {
-        GD.Print("parried");
-        _streamSound.Play();
-    }
+    public override void GetHit(MainCharacter character, Area2D area) => _streamSound.Play();
 
     private void OnAnimationFinished(StringName animName)
     {
