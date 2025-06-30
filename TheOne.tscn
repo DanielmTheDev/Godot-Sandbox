@@ -95,24 +95,6 @@ tracks/5/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_ehkj1"]
-resource_name = "idle"
-length = 0.750013
-loop_mode = 1
-step = 0.125
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 0, 1, 4, 5]
-}
-
 [sub_resource type="Animation" id="Animation_0aqxv"]
 resource_name = "attack1"
 length = 0.750013
@@ -154,21 +136,31 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_rcpus"]
-resource_name = "run"
-step = 0.125
-
-[sub_resource type="Animation" id="Animation_r3sxv"]
-resource_name = "up"
+[sub_resource type="Animation" id="Animation_ajs1i"]
+resource_name = "death"
 step = 0.125
 
 [sub_resource type="Animation" id="Animation_q71ue"]
 resource_name = "down"
 step = 0.125
 
-[sub_resource type="Animation" id="Animation_ajs1i"]
-resource_name = "death"
-step = 0.125
+[sub_resource type="Animation" id="Animation_ehkj1"]
+resource_name = "idle"
+length = 1.00002
+loop_mode = 1
+step = 0.166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.333333, 0.5, 0.666667, 0.833333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
 
 [sub_resource type="Animation" id="Animation_8ck82"]
 resource_name = "parry"
@@ -198,6 +190,14 @@ tracks/1/keys = {
 "update": 1,
 "values": [false, true]
 }
+
+[sub_resource type="Animation" id="Animation_rcpus"]
+resource_name = "run"
+step = 0.125
+
+[sub_resource type="Animation" id="Animation_r3sxv"]
+resource_name = "up"
+step = 0.125
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0o1tl"]
 _data = {

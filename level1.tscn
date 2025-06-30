@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://i2npv5ccea5j"]
+[gd_scene load_steps=10 format=4 uid="uid://i2npv5ccea5j"]
 
 [ext_resource type="Texture2D" uid="uid://bhb1mdso6xqo5" path="res://images/lava-background.png" id="1_ootpb"]
 [ext_resource type="Texture2D" uid="uid://bk3v1y2te2pch" path="res://images/lava.png" id="2_v38iq"]
 [ext_resource type="Texture2D" uid="uid://db3ar6dem0lm5" path="res://tilesets/tilesheet_complete.png" id="3_ootpb"]
 [ext_resource type="AudioStream" uid="uid://d4nfxqvof0mw0" path="res://sounds/Ninja Gaiden Act 4-2 (Famitracker VRC6) [AO4PGQ_XZXg].mp3" id="5_v8kj3"]
 [ext_resource type="PackedScene" uid="uid://0pohi0sese8q" path="res://TheOne.tscn" id="6_crycw"]
+[ext_resource type="PackedScene" uid="uid://bna2cvrihcvnb" path="res://Projectile.tscn" id="6_i2041"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_dopym"]
 tile_data = PackedInt32Array(0, 458755, 1, 1, 524291, 1)
@@ -357,3 +358,6 @@ scale = Vector2(0.1, 0.1)
 position = Vector2(335, 255)
 scale = Vector2(0.1, 0.1)
 ControlsPrefix = "p2_"
+
+[node name="Projectile" parent="." instance=ExtResource("6_i2041")]
+position = Vector2(236, 92)
