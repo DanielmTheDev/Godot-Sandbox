@@ -1,14 +1,16 @@
-[gd_scene load_steps=23 format=3 uid="uid://0pohi0sese8q"]
+[gd_scene load_steps=25 format=3 uid="uid://0pohi0sese8q"]
 
 [ext_resource type="Texture2D" uid="uid://cpyb2f2wlx3lv" path="res://the_one/Idle Animation Var 1 Sprite (horizontal).png" id="1_ehkj1"]
 [ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/Scripts/MainCharacter.cs" id="1_xcwry"]
 [ext_resource type="Script" uid="uid://bei6tl5ussl8a" path="res://Players/Scripts/Gravity.cs" id="2_qy3el"]
+[ext_resource type="PackedScene" uid="uid://bna2cvrihcvnb" path="res://Projectile.tscn" id="2_r3sxv"]
 [ext_resource type="Texture2D" uid="uid://byxh2wr4ajbu2" path="res://images/red_square.png" id="3_0aqxv"]
 [ext_resource type="Texture2D" uid="uid://cceo3205egua" path="res://images/blood_small.png" id="3_0o1tl"]
 [ext_resource type="AudioStream" uid="uid://dcoo2qwrrf5vw" path="res://sounds/sword_swing1.mp3" id="5_70clr"]
 [ext_resource type="Script" uid="uid://bdmrvrxgtgyxq" path="res://Players/Scripts/GettingHit.cs" id="6_0aqxv"]
 [ext_resource type="AudioStream" uid="uid://cblru0phgdg8w" path="res://sounds/jump.mp3" id="6_xcwry"]
 [ext_resource type="AudioStream" uid="uid://142s1ahj30b8" path="res://sounds/parry.mp3" id="9_rcpus"]
+[ext_resource type="AudioStream" uid="uid://b6ufv1kvgll0x" path="res://sounds/incantation.mp3" id="11_q71ue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dr2vk"]
 size = Vector2(32.4324, 381)
@@ -221,6 +223,7 @@ scale_min = 0.5
 
 [node name="MainCharacter" type="CharacterBody2D"]
 script = ExtResource("1_xcwry")
+Projectile = ExtResource("2_r3sxv")
 
 [node name="PhysicalShape" type="CollisionShape2D" parent="."]
 position = Vector2(-29, 15.5)
@@ -275,6 +278,10 @@ rotation = -1.57506
 scale = Vector2(0.158703, 0.0628895)
 texture = ExtResource("3_0aqxv")
 
+[node name="ProjectileSpawnPoint" type="Marker2D" parent="Visuals"]
+position = Vector2(245, 14)
+gizmo_extents = 103.2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Visuals/Sprite2d")
 libraries = {
@@ -311,5 +318,8 @@ stream = ExtResource("6_xcwry")
 
 [node name="Parry" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("9_rcpus")
+
+[node name="Incantation" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("11_q71ue")
 
 [connection signal="area_entered" from="Visuals/HurtArea" to="Logic/TakingDamage" method="GetHit"]

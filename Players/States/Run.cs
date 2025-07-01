@@ -22,12 +22,12 @@ public sealed class Run : State
 
     public override void Update(MainCharacter character, double delta)
     {
-        if (Input.IsActionJustPressed(_controls.Jump) && character.IsOnFloor())
+        if (_controls.JumpJustPressed() && character.IsOnFloor())
         {
             character.SwitchState(StateName.Jumping);
         }
 
-        else if (Input.IsActionJustPressed(_controls.Attack1) && character.IsOnFloor())
+        else if (_controls.AttackJustPressed() && character.IsOnFloor())
         {
             character.SwitchState(StateName.Attacking);
         }
@@ -36,6 +36,10 @@ public sealed class Run : State
         {
             character.Velocity = new Vector2(0, character.Velocity.Y);
             character.SwitchState(StateName.Idle);
+        }
+        else if (_controls.CastingJustPressed() && character.IsOnFloor())
+        {
+            character.SwitchState(StateName.CastingProjectile);
         }
         else
         {

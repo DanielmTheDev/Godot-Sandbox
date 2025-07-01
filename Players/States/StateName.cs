@@ -7,5 +7,6 @@ public enum StateName
     Running,
     Jumping,
     Dead,
-    Parrying
+    Parrying,
+    CastingProjectile
 }

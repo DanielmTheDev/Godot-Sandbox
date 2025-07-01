@@ -9,6 +9,8 @@ public partial class MainCharacter : CharacterBody2D
 {
     [Export]
     public string ControlsPrefix = "p1_";
+    [Export]
+    public PackedScene Projectile = null!;
 
     private AnimationPlayer _animPlayer = null!;
     private InputProfile _controls = null!;
@@ -30,7 +32,8 @@ public partial class MainCharacter : CharacterBody2D
             { StateName.Attacking, new Attack(_animPlayer, this) },
             { StateName.Jumping, new Jump(_animPlayer, _controls) },
             { StateName.Parrying, new Parry(_animPlayer, this) },
-            { StateName.Dead, new Dead(_animPlayer) }
+            { StateName.Dead, new Dead(_animPlayer) },
+            { StateName.CastingProjectile, new CastingProjectile(_animPlayer, Projectile, this) }
         };
         CurrentState = _states[StateName.Idle];
         SwitchState(StateName.Idle);

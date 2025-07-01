@@ -35,6 +35,10 @@ public sealed class Idle : State
         {
             character.SwitchState(StateName.Parrying);
         }
+        else if (_controls.CastingJustPressed() && character.IsOnFloor())
+        {
+            character.SwitchState(StateName.CastingProjectile);
+        }
         else
         {
             _animPlayer.Play("idle");

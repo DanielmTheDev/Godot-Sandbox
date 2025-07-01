@@ -1,4 +1,5 @@
 using Godot;
+using Sandbox.Players.States;
 
 namespace Sandbox.Players.Controls;
 
@@ -13,6 +14,7 @@ public class InputProfile
     public string Jump => $"{_prefix}jump";
     public string Attack1 => $"{_prefix}attack1";
     public string Parry => $"{_prefix}parry";
+    public string CastingProjectile => $"{_prefix}cast_projectile";
 
     public InputProfile(string prefix) => _prefix = prefix;
 
@@ -31,4 +33,5 @@ public class InputProfile
     public bool MoveRightJustPressed() => Input.IsActionJustPressed(MoveRight);
     public bool JumpJustPressed() => Input.IsActionJustPressed(Jump);
     public bool ParryJustPressed() => Input.IsActionJustPressed(Parry);
+    public bool CastingJustPressed() => Input.IsActionJustPressed(CastingProjectile);
 }
