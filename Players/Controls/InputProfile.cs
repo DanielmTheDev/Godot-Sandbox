@@ -4,18 +4,18 @@ namespace Sandbox.Players.Controls;
 
 public class InputProfile
 {
-    private readonly string _prefix;
+    private readonly string _player;
     private const float MoveSpeed = 200f;
 
 
-    public string MoveLeft => $"{_prefix}move_left";
-    public string MoveRight => $"{_prefix}move_right";
-    public string Jump => $"{_prefix}jump";
-    public string Attack1 => $"{_prefix}attack1";
-    public string Parry => $"{_prefix}parry";
-    public string CastingProjectile => $"{_prefix}cast_projectile";
+    public string MoveLeft => $"{_player}move_left";
+    public string MoveRight => $"{_player}move_right";
+    public string Jump => $"{_player}jump";
+    public string Attack1 => $"{_player}attack1";
+    public string Parry => $"{_player}parry";
+    public string CastingProjectile => $"{_player}cast_projectile";
 
-    public InputProfile(string prefix) => _prefix = prefix;
+    public InputProfile(Player player) => _player = player.ControlsPrefix();
 
     public float GetXMovement()
     {

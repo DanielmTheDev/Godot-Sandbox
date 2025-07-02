@@ -8,9 +8,9 @@ namespace Sandbox.Players.Scripts;
 public partial class MainCharacter : CharacterBody2D
 {
     [Export]
-    public string ControlsPrefix = "p1_";
-    [Export]
     public PackedScene Projectile = null!;
+    [Export]
+    public Player Player;
 
     private AnimationPlayer _animPlayer = null!;
     private InputProfile _controls = null!;
@@ -22,7 +22,7 @@ public partial class MainCharacter : CharacterBody2D
     public override void _Ready()
     {
         _animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
-        _controls = new InputProfile(ControlsPrefix);
+        _controls = new InputProfile(Player);
         _visuals = GetNode<Node2D>("Visuals");
 
         _states =

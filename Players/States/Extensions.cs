@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using Sandbox.Players.States;
 
-namespace Sandbox.Players.Scripts;
+namespace Sandbox.Players.States;
 
-public static class StateListExtensions
+public static class Extensions
 {
     public static State GetByName(this List<State> states, StateName name) => states.Single(state => state.StateName == name);
 }
