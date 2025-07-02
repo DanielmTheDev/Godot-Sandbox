@@ -14,8 +14,13 @@ public abstract class State
 
 public static class DefaultHitResponse
 {
-    public static void Handle(MainCharacter character, Area2D _)
+    public static void Handle(MainCharacter character, Area2D incoming)
     {
+        if (incoming.IsInGroup(character.Player.ToString()))
+        {
+            return;
+        }
+
         var bloodEmitter = character.GetNode<GpuParticles2D>("BloodEmitter");
         bloodEmitter.Restart();
         character.SwitchState(StateName.Dead);

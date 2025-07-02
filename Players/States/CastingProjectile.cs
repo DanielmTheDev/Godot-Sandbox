@@ -21,12 +21,19 @@ public class CastingProjectile : State
 
     public override void Enter(MainCharacter character)
     {
+        var instance = Cast(character);
+        instance.OnLaunched += OnLaunched;
+    }
+
+    private Projectile Cast(MainCharacter character)
+    {
         _incantationPlayer.Play();
         var instance = _projectile.Instantiate<Projectile>();
         instance.Position = _spawnPoint.GlobalPosition;
         instance.Direction = character.GetNode<Node2D>("Visuals").Scale.X < 0 ? Vector2.Left : Vector2.Right;
+        instance.AddToGroup(character.Player.ToString());
         character.GetTree().CurrentScene.AddChild(instance);
-        instance.OnLaunched += OnLaunched;
+        return instance;
     }
 
     private void OnLaunched()

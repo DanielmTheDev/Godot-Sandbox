@@ -7,7 +7,6 @@ public class InputProfile
     private readonly string _player;
     private const float MoveSpeed = 200f;
 
-
     public string MoveLeft => $"{_player}move_left";
     public string MoveRight => $"{_player}move_right";
     public string Jump => $"{_player}jump";
