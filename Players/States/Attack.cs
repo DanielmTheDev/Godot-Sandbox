@@ -10,20 +10,20 @@ public sealed class Attack : State
     private readonly AnimationPlayer _animPlayer;
     private readonly MainCharacter _character;
 
-    public Attack(AnimationPlayer animPlayer, MainCharacter character)
+    public Attack(AnimationPlayer animPlayer, MainCharacter character) : base(character)
     {
         _animPlayer = animPlayer;
         _character = character;
     }
 
 
-    public override void Enter(MainCharacter character)
+    public override void Enter()
     {
         _animPlayer.AnimationFinished += OnAnimationFinished;
         _animPlayer.Play("attack1");
     }
 
-    public override void Exit(MainCharacter character) => _animPlayer.AnimationFinished -= OnAnimationFinished;
+    public override void Exit() => _animPlayer.AnimationFinished -= OnAnimationFinished;
 
     private void OnAnimationFinished(StringName animName)
     {

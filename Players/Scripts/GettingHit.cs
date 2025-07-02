@@ -6,5 +6,5 @@ public partial class GettingHit : Node
 {
     [Export] public MainCharacter MainCharacter = null!;
 
-    public void GetHit(Area2D area) => MainCharacter.CurrentState.GetHit(MainCharacter, area);
+    public void GetHit(Area2D area) => MainCharacter.CurrentState.GetHit(area);
 }

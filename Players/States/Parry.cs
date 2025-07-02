@@ -10,22 +10,22 @@ public class Parry : State
     private readonly MainCharacter _character;
     private readonly AudioStreamPlayer2D _streamSound;
 
-    public Parry(AnimationPlayer animPlayer, MainCharacter character)
+    public Parry(AnimationPlayer animPlayer, MainCharacter character) : base(character)
     {
         _animPlayer = animPlayer;
         _character = character;
         _streamSound = character.GetNode<AudioStreamPlayer2D>("Sounds/Parry");
     }
 
-    public override void Enter(MainCharacter character)
+    public override void Enter()
     {
         _animPlayer.AnimationFinished += OnAnimationFinished;
         _animPlayer.Play("parry");
     }
 
-    public override void Exit(MainCharacter character) => _animPlayer.AnimationFinished -= OnAnimationFinished;
+    public override void Exit() => _animPlayer.AnimationFinished -= OnAnimationFinished;
 
-    public override void GetHit(MainCharacter character, Area2D area) => _streamSound.Play();
+    public override void GetHit(Area2D area) => _streamSound.Play();
 
     private void OnAnimationFinished(StringName animName)
     {

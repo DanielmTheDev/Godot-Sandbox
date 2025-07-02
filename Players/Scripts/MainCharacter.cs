@@ -27,12 +27,12 @@ public partial class MainCharacter : CharacterBody2D
 
         _states =
         [
-            new Idle(_animPlayer, _controls),
-            new Run(_animPlayer, _visuals, _controls),
+            new Idle(_animPlayer, _controls, this),
+            new Run(_animPlayer, _visuals, _controls, this),
             new Attack(_animPlayer, this),
-            new Jump(_animPlayer, _controls),
+            new Jump(_animPlayer, _controls, this),
             new Parry(_animPlayer, this),
-            new Dead(_animPlayer),
+            new Dead(_animPlayer, this),
             new CastingProjectile(Projectile, this)
         ];
         CurrentState = _states.GetByName(StateName.Idle);
@@ -41,10 +41,10 @@ public partial class MainCharacter : CharacterBody2D
 
     public void SwitchState(StateName name)
     {
-        CurrentState.Exit(this);
+        CurrentState.Exit();
         CurrentState = _states.GetByName(name);
-        CurrentState.Enter(this);
+        CurrentState.Enter();
     }
 
-    public override void _PhysicsProcess(double delta) => CurrentState.Update(this, delta);
+    public override void _PhysicsProcess(double delta) => CurrentState.Update(delta);
 }

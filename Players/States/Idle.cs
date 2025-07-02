@@ -10,35 +10,35 @@ public sealed class Idle : State
     private readonly AnimationPlayer _animPlayer;
     private readonly InputProfile _controls;
 
-    public Idle(AnimationPlayer animPlayer, InputProfile controls)
+    public Idle(AnimationPlayer animPlayer, InputProfile controls, MainCharacter character) : base(character)
     {
         _animPlayer = animPlayer;
         _controls = controls;
     }
 
-    public override void Enter(MainCharacter character) => _animPlayer.Play("idle");
+    public override void Enter() => _animPlayer.Play("idle");
 
-    public override void Update(MainCharacter character, double delta)
+    public override void Update(double delta)
     {
-        if (_controls.AttackJustPressed() && character.IsOnFloor())
+        if (_controls.AttackJustPressed() && Character.IsOnFloor())
         {
-            character.SwitchState(StateName.Attacking);
+            Character.SwitchState(StateName.Attacking);
         }
-        else if (_controls.JumpJustPressed() && character.IsOnFloor())
+        else if (_controls.JumpJustPressed() && Character.IsOnFloor())
         {
-            character.SwitchState(StateName.Jumping);
+            Character.SwitchState(StateName.Jumping);
         }
         else if (_controls.MoveLeftJustPressed() || _controls.MoveRightJustPressed())
         {
-            character.SwitchState(StateName.Running);
+            Character.SwitchState(StateName.Running);
         }
-        else if (_controls.ParryJustPressed() && character.IsOnFloor())
+        else if (_controls.ParryJustPressed() && Character.IsOnFloor())
         {
-            character.SwitchState(StateName.Parrying);
+            Character.SwitchState(StateName.Parrying);
         }
-        else if (_controls.CastingJustPressed() && character.IsOnFloor())
+        else if (_controls.CastingJustPressed() && Character.IsOnFloor())
         {
-            character.SwitchState(StateName.CastingProjectile);
+            Character.SwitchState(StateName.CastingProjectile);
         }
         else
         {

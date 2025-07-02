@@ -11,48 +11,48 @@ public sealed class Run : State
     private readonly Node2D _visuals;
     private readonly InputProfile _controls;
 
-    public Run(AnimationPlayer animPlayer, Node2D visuals, InputProfile controls)
+    public Run(AnimationPlayer animPlayer, Node2D visuals, InputProfile controls, MainCharacter character) : base(character)
     {
         _animPlayer = animPlayer;
         _visuals = visuals;
         _controls = controls;
     }
 
-    public override void Enter(MainCharacter character)
-        => ProcessMovement(character);
+    public override void Enter()
+        => ProcessMovement();
 
-    public override void Update(MainCharacter character, double delta)
+    public override void Update(double delta)
     {
-        if (_controls.JumpJustPressed() && character.IsOnFloor())
+        if (_controls.JumpJustPressed() && Character.IsOnFloor())
         {
-            character.SwitchState(StateName.Jumping);
+            Character.SwitchState(StateName.Jumping);
         }
 
-        else if (_controls.AttackJustPressed() && character.IsOnFloor())
+        else if (_controls.AttackJustPressed() && Character.IsOnFloor())
         {
-            character.SwitchState(StateName.Attacking);
+            Character.SwitchState(StateName.Attacking);
         }
 
         else if (!(Input.IsActionPressed(_controls.MoveLeft) || Input.IsActionPressed(_controls.MoveRight)))
         {
-            character.Velocity = new Vector2(0, character.Velocity.Y);
-            character.SwitchState(StateName.Idle);
+            Character.Velocity = new Vector2(0, Character.Velocity.Y);
+            Character.SwitchState(StateName.Idle);
         }
-        else if (_controls.CastingJustPressed() && character.IsOnFloor())
+        else if (_controls.CastingJustPressed() && Character.IsOnFloor())
         {
-            character.SwitchState(StateName.CastingProjectile);
+            Character.SwitchState(StateName.CastingProjectile);
         }
         else
         {
-            ProcessMovement(character);
+            ProcessMovement();
         }
     }
 
-    private void ProcessMovement(MainCharacter character)
+    private void ProcessMovement()
     {
         var xMovement = _controls.GetXMovement();
         AdjustOrientation(xMovement);
-        character.Velocity = new Vector2(xMovement, character.Velocity.Y);
+        Character.Velocity = new Vector2(xMovement, Character.Velocity.Y);
         _animPlayer.Play("run");
     }
 

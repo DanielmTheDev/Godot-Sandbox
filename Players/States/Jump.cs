@@ -11,29 +11,29 @@ public sealed class Jump : State
     private readonly AnimationPlayer _animPlayer;
     private readonly InputProfile _controls;
 
-    public Jump(AnimationPlayer animPlayer, InputProfile controls)
+    public Jump(AnimationPlayer animPlayer, InputProfile controls, MainCharacter character) : base(character)
     {
         _animPlayer = animPlayer;
         _controls = controls;
     }
 
-    public override void Enter(MainCharacter character)
+    public override void Enter()
     {
-        character.Velocity = new Vector2(character.Velocity.X, JumpVelocity);
+        Character.Velocity = new Vector2(Character.Velocity.X, JumpVelocity);
         _animPlayer.Play("up");
     }
 
-    public override void Update(MainCharacter character, double delta)
+    public override void Update(double delta)
     {
-        if (character.Velocity.Y > 0)
+        if (Character.Velocity.Y > 0)
         {
             _animPlayer.Play("down");
         }
 
-        character.Velocity = new Vector2(_controls.GetXMovement(), character.Velocity.Y);
-        if (character.IsOnFloor())
+        Character.Velocity = new Vector2(_controls.GetXMovement(), Character.Velocity.Y);
+        if (Character.IsOnFloor())
         {
-            character.SwitchState(StateName.Idle);
+            Character.SwitchState(StateName.Idle);
         }
     }
 }

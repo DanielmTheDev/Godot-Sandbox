@@ -8,7 +8,7 @@ public class Dead : State
     public override StateName StateName => StateName.Dead;
     private readonly AnimationPlayer _animPlayer;
 
-    public Dead(AnimationPlayer animPlayer) => _animPlayer = animPlayer;
+    public Dead(AnimationPlayer animPlayer, MainCharacter character) : base(character) => _animPlayer = animPlayer;
 
-    public override void Enter(MainCharacter character) => _animPlayer.Play("death");
+    public override void Enter() => _animPlayer.Play("death");
 }

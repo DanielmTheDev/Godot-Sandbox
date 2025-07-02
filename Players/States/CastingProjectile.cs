@@ -7,21 +7,21 @@ public class CastingProjectile : State
 {
     public override StateName StateName => StateName.CastingProjectile;
     private readonly PackedScene _projectile;
-    private readonly MainCharacter _mainCharacter;
+    private readonly MainCharacter _character;
     private readonly AudioStreamPlayer2D _incantationPlayer;
     private readonly Marker2D _spawnPoint;
 
-    public CastingProjectile(PackedScene projectile, MainCharacter mainCharacter)
+    public CastingProjectile(PackedScene projectile, MainCharacter character) : base(character)
     {
         _projectile = projectile;
-        _mainCharacter = mainCharacter;
-        _incantationPlayer = mainCharacter.GetNode<AudioStreamPlayer2D>("Sounds/Incantation");
-        _spawnPoint = mainCharacter.GetNode<Marker2D>("Visuals/ProjectileSpawnPoint");
+        _character = character;
+        _incantationPlayer = character.GetNode<AudioStreamPlayer2D>("Sounds/Incantation");
+        _spawnPoint = character.GetNode<Marker2D>("Visuals/ProjectileSpawnPoint");
     }
 
-    public override void Enter(MainCharacter character)
+    public override void Enter()
     {
-        var instance = Cast(character);
+        var instance = Cast(_character);
         instance.OnLaunched += OnLaunched;
     }
 
@@ -39,9 +39,9 @@ public class CastingProjectile : State
     private void OnLaunched()
     {
         _incantationPlayer.Stop();
-        if (_mainCharacter.CurrentState.StateName != StateName.Dead)
+        if (_character.CurrentState.StateName != StateName.Dead)
         {
-            _mainCharacter.SwitchState(StateName.Idle);
+            _character.SwitchState(StateName.Idle);
         }
     }
 }
