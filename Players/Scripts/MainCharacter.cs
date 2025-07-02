@@ -33,7 +33,7 @@ public partial class MainCharacter : CharacterBody2D
             { StateName.Jumping, new Jump(_animPlayer, _controls) },
             { StateName.Parrying, new Parry(_animPlayer, this) },
             { StateName.Dead, new Dead(_animPlayer) },
-            { StateName.CastingProjectile, new CastingProjectile(_animPlayer, Projectile, this) }
+            { StateName.CastingProjectile, new CastingProjectile(Projectile, this) }
         };
         CurrentState = _states[StateName.Idle];
         SwitchState(StateName.Idle);

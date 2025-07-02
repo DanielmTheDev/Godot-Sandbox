@@ -24,21 +24,34 @@ public partial class Projectile : Area2D
 
     public override void _PhysicsProcess(double delta)
     {
-        if (!_launched)
+        if (_launched)
         {
-            _timeElapsed += (float)delta;
-            Scale = Vector2.One * Mathf.Clamp(_timeElapsed / ChargeTime, 0, 1);
-
-            if (_timeElapsed >= ChargeTime)
-            {
-                _launched = true;
-                _launchPlayer.Play();
-                OnLaunched?.Invoke();
-            }
+            Move(delta);
         }
         else
         {
-            Position += Direction * Speed * (float)delta;
+            Grow(delta);
+
+            var timeToLaunch = _timeElapsed >= ChargeTime;
+            if (timeToLaunch)
+            {
+                Launch();
+            }
         }
     }
+
+    private void Launch()
+    {
+        _launched = true;
+        _launchPlayer.Play();
+        OnLaunched?.Invoke();
+    }
+
+    private void Grow(double delta)
+    {
+        _timeElapsed += (float)delta;
+        Scale = Vector2.One * Mathf.Clamp(_timeElapsed / ChargeTime, 0, 1);
+    }
+
+    private void Move(double delta) => Position += Direction * Speed * (float)delta;
 }
