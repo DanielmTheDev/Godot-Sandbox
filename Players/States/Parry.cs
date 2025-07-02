@@ -5,6 +5,7 @@ namespace Sandbox.Players.States;
 
 public class Parry : State
 {
+    public override StateName StateName => StateName.Parrying;
     private readonly AnimationPlayer _animPlayer;
     private readonly MainCharacter _character;
     private readonly AudioStreamPlayer2D _streamSound;

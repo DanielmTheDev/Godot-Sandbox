@@ -5,6 +5,7 @@ namespace Sandbox.Players.States;
 
 public class CastingProjectile : State
 {
+    public override StateName StateName => StateName.CastingProjectile;
     private readonly PackedScene _projectile;
     private readonly MainCharacter _mainCharacter;
     private readonly AudioStreamPlayer2D _incantationPlayer;
@@ -31,6 +32,9 @@ public class CastingProjectile : State
     private void OnLaunched()
     {
         _incantationPlayer.Stop();
-        _mainCharacter.SwitchState(StateName.Idle);
+        if (_mainCharacter.CurrentState.StateName != StateName.Dead)
+        {
+            _mainCharacter.SwitchState(StateName.Idle);
+        }
     }
 }

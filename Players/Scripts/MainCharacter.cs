@@ -15,7 +15,7 @@ public partial class MainCharacter : CharacterBody2D
     private AnimationPlayer _animPlayer = null!;
     private InputProfile _controls = null!;
 
-    private Dictionary<StateName, State> _states = null!;
+    private List<State> _states = null!;
     public State CurrentState = null!;
     private Node2D _visuals = null!;
 
@@ -25,24 +25,24 @@ public partial class MainCharacter : CharacterBody2D
         _controls = new InputProfile(ControlsPrefix);
         _visuals = GetNode<Node2D>("Visuals");
 
-        _states = new Dictionary<StateName, State>
-        {
-            { StateName.Idle, new Idle(_animPlayer, _controls) },
-            { StateName.Running, new Run(_animPlayer, _visuals, _controls) },
-            { StateName.Attacking, new Attack(_animPlayer, this) },
-            { StateName.Jumping, new Jump(_animPlayer, _controls) },
-            { StateName.Parrying, new Parry(_animPlayer, this) },
-            { StateName.Dead, new Dead(_animPlayer) },
-            { StateName.CastingProjectile, new CastingProjectile(Projectile, this) }
-        };
-        CurrentState = _states[StateName.Idle];
+        _states =
+        [
+            new Idle(_animPlayer, _controls),
+            new Run(_animPlayer, _visuals, _controls),
+            new Attack(_animPlayer, this),
+            new Jump(_animPlayer, _controls),
+            new Parry(_animPlayer, this),
+            new Dead(_animPlayer),
+            new CastingProjectile(Projectile, this)
+        ];
+        CurrentState = _states.GetByName(StateName.Idle);
         SwitchState(StateName.Idle);
     }
 
     public void SwitchState(StateName name)
     {
         CurrentState.Exit(this);
-        CurrentState = _states[name];
+        CurrentState = _states.GetByName(name);
         CurrentState.Enter(this);
     }
 

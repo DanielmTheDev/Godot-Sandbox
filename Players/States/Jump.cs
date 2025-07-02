@@ -6,6 +6,7 @@ namespace Sandbox.Players.States;
 
 public sealed class Jump : State
 {
+    public override StateName StateName => StateName.Jumping;
     private const float JumpVelocity = -500f;
     private readonly AnimationPlayer _animPlayer;
     private readonly InputProfile _controls;

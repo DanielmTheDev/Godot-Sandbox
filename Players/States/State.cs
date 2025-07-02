@@ -5,10 +5,10 @@ namespace Sandbox.Players.States;
 
 public abstract class State
 {
+    public abstract StateName StateName { get; }
     public virtual void Enter(MainCharacter character) {}
     public virtual void Exit(MainCharacter character) {}
     public virtual void Update(MainCharacter character, double delta) {}
-
     public virtual void GetHit(MainCharacter character, Area2D area) => DefaultHitResponse.Handle(character, area);
 }
 

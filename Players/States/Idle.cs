@@ -6,6 +6,7 @@ namespace Sandbox.Players.States;
 
 public sealed class Idle : State
 {
+    public override StateName StateName => StateName.Idle;
     private readonly AnimationPlayer _animPlayer;
     private readonly InputProfile _controls;
 

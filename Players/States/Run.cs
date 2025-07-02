@@ -6,6 +6,7 @@ namespace Sandbox.Players.States;
 
 public sealed class Run : State
 {
+    public override StateName StateName => StateName.Running;
     private readonly AnimationPlayer _animPlayer;
     private readonly Node2D _visuals;
     private readonly InputProfile _controls;

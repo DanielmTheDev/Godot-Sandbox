@@ -1,5 +1,6 @@
 using Godot;
 
+// ReSharper disable once CheckNamespace
 public partial class Hud : CanvasLayer
 {
     [Signal]
