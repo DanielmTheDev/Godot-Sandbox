@@ -29,7 +29,7 @@ public partial class MainCharacter : CharacterBody2D
         [
             new Idle(_animPlayer, _controls, this),
             new Run(_animPlayer, _visuals, _controls, this),
-            new Attack(_animPlayer, this),
+            new Attack(_animPlayer, this), // subcribe to event here and emit signal here?
             new Jump(_animPlayer, _controls, this),
             new Parry(_animPlayer, this),
             new Dead(_animPlayer, this),

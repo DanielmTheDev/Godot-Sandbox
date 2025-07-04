@@ -28,10 +28,6 @@ public sealed class Idle : State
         {
             Character.SwitchState(StateName.Jumping);
         }
-        else if (_controls.MoveLeftJustPressed() || _controls.MoveRightJustPressed())
-        {
-            Character.SwitchState(StateName.Running);
-        }
         else if (_controls.ParryJustPressed() && Character.IsOnFloor())
         {
             Character.SwitchState(StateName.Parrying);
@@ -39,6 +35,10 @@ public sealed class Idle : State
         else if (_controls.CastingJustPressed() && Character.IsOnFloor())
         {
             Character.SwitchState(StateName.CastingProjectile);
+        }
+        else if (_controls.MoveLeftJustPressed() || _controls.MoveRightJustPressed())
+        {
+            Character.SwitchState(StateName.Running);
         }
         else
         {
