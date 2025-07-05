@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://0pohi0sese8q"]
+[gd_scene load_steps=27 format=3 uid="uid://0pohi0sese8q"]
 
 [ext_resource type="Texture2D" uid="uid://cpyb2f2wlx3lv" path="res://the_one/Idle Animation Var 1 Sprite (horizontal).png" id="1_ehkj1"]
 [ext_resource type="Script" uid="uid://dmeyf17a6fbxu" path="res://Players/Scripts/MainCharacter.cs" id="1_xcwry"]
@@ -9,19 +9,20 @@
 [ext_resource type="AudioStream" uid="uid://dcoo2qwrrf5vw" path="res://sounds/sword_swing1.mp3" id="5_70clr"]
 [ext_resource type="Texture2D" uid="uid://bwg5on34yi0w" path="res://the_one/attack1.png" id="5_ajs1i"]
 [ext_resource type="Script" uid="uid://bdmrvrxgtgyxq" path="res://Players/Scripts/GettingHit.cs" id="6_0aqxv"]
+[ext_resource type="Texture2D" uid="uid://d1nkejbm7oji7" path="res://the_one/idle.png" id="6_8ck82"]
 [ext_resource type="AudioStream" uid="uid://cblru0phgdg8w" path="res://sounds/jump.mp3" id="6_xcwry"]
 [ext_resource type="AudioStream" uid="uid://142s1ahj30b8" path="res://sounds/parry.mp3" id="9_rcpus"]
 [ext_resource type="AudioStream" uid="uid://b6ufv1kvgll0x" path="res://sounds/incantation.mp3" id="11_q71ue"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dr2vk"]
-size = Vector2(32.4324, 381)
+size = Vector2(32.4324, 354)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xcwry"]
 radius = 26.8652
 height = 419.19
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0aqxv"]
-size = Vector2(324, 180)
+size = Vector2(324, 169.5)
 
 [sub_resource type="Animation" id="Animation_qy3el"]
 length = 0.001
@@ -210,7 +211,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("1_ehkj1")]
+"values": [ExtResource("6_8ck82")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -287,7 +288,7 @@ script = ExtResource("1_xcwry")
 Projectile = ExtResource("2_r3sxv")
 
 [node name="PhysicalShape" type="CollisionShape2D" parent="."]
-position = Vector2(-29, 15.5)
+position = Vector2(-29, 2)
 scale = Vector2(10.36, 1)
 shape = SubResource("RectangleShape2D_dr2vk")
 
@@ -315,7 +316,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="HurtBox" type="CollisionShape2D" parent="Visuals/HurtArea"]
-position = Vector2(-27, 21)
+position = Vector2(-27, 10.5)
 scale = Vector2(1, 2)
 shape = SubResource("RectangleShape2D_0aqxv")
 

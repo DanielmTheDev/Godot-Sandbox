@@ -16,9 +16,9 @@ public sealed class Idle : State
         _controls = controls;
     }
 
-    public override void Enter() => _animPlayer.Play("idle");
+    protected override void OnEnter() => _animPlayer.Play("idle");
 
-    public override void Update(double delta)
+    protected override void OnUpdate(double delta)
     {
         if (_controls.AttackJustPressed() && Character.IsOnFloor())
         {

@@ -17,13 +17,13 @@ public sealed class Attack : State
     }
 
 
-    public override void Enter()
+    protected override void OnEnter()
     {
         _animPlayer.AnimationFinished += OnAnimationFinished;
         _animPlayer.Play("attack1");
     }
 
-    public override void Exit() => _animPlayer.AnimationFinished -= OnAnimationFinished;
+    protected override void OnExit() => _animPlayer.AnimationFinished -= OnAnimationFinished;
 
     private void OnAnimationFinished(StringName animName)
     {

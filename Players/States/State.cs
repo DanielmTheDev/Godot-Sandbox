@@ -1,3 +1,4 @@
+using System;
 using Godot;
 using Sandbox.Players.Scripts;
 
@@ -6,14 +7,44 @@ namespace Sandbox.Players.States;
 public abstract class State
 {
     protected readonly MainCharacter Character;
+    public abstract StateName StateName { get; }
 
     public State(MainCharacter character) => Character = character;
 
-    public abstract StateName StateName { get; }
-    public virtual void Enter() {}
-    public virtual void Exit() {}
-    public virtual void Update(double delta) {}
     public virtual void GetHit(Area2D area) => DefaultHitResponse.Handle(Character, area);
+    public event Action<State>? OnEntered;
+    public event Action<State>? OnExited;
+    public event Action<State>? OnUpdated;
+
+    public void Enter()
+    {
+        OnEntered?.Invoke(this);
+        OnEnter();
+    }
+
+    public void Exit()
+    {
+        OnExited?.Invoke(this);
+        OnExit();
+    }
+
+    public void Update(double delta)
+    {
+        OnUpdated?.Invoke(this);
+        OnUpdate(delta);
+    }
+
+    protected virtual void OnEnter()
+    {
+    }
+
+    protected virtual void OnExit()
+    {
+    }
+
+    protected virtual void OnUpdate(double delta)
+    {
+    }
 }
 
 public static class DefaultHitResponse

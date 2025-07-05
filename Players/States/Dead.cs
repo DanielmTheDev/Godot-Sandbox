@@ -10,5 +10,5 @@ public class Dead : State
 
     public Dead(AnimationPlayer animPlayer, MainCharacter character) : base(character) => _animPlayer = animPlayer;
 
-    public override void Enter() => _animPlayer.Play("death");
+    protected override void OnEnter() => _animPlayer.Play("death");
 }

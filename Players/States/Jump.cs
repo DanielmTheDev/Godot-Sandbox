@@ -17,13 +17,13 @@ public sealed class Jump : State
         _controls = controls;
     }
 
-    public override void Enter()
+    protected override void OnEnter()
     {
         Character.Velocity = new Vector2(Character.Velocity.X, JumpVelocity);
         _animPlayer.Play("up");
     }
 
-    public override void Update(double delta)
+    protected override void OnUpdate(double delta)
     {
         if (Character.Velocity.Y > 0)
         {

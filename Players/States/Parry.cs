@@ -17,13 +17,13 @@ public class Parry : State
         _streamSound = character.GetNode<AudioStreamPlayer2D>("Sounds/Parry");
     }
 
-    public override void Enter()
+    protected override void OnEnter()
     {
         _animPlayer.AnimationFinished += OnAnimationFinished;
         _animPlayer.Play("parry");
     }
 
-    public override void Exit() => _animPlayer.AnimationFinished -= OnAnimationFinished;
+    protected override void OnExit() => _animPlayer.AnimationFinished -= OnAnimationFinished;
 
     public override void GetHit(Area2D area) => _streamSound.Play();
 

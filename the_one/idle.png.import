@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxsd62h8rrs3t"
-path="res://.godot/imported/Idle Animation Var 2 Sprite (vertikal).png-908fb23e14117ed1828874937808a796.ctex"
+uid="uid://d1nkejbm7oji7"
+path="res://.godot/imported/idle.png-fac496758ed958b6f18831aa187927ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://the_one/Idle Animation Var 2 Sprite (vertikal).png"
-dest_files=["res://.godot/imported/Idle Animation Var 2 Sprite (vertikal).png-908fb23e14117ed1828874937808a796.ctex"]
+source_file="res://the_one/idle.png"
+dest_files=["res://.godot/imported/idle.png-fac496758ed958b6f18831aa187927ee.ctex"]
 
 [params]
 

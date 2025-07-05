@@ -18,10 +18,10 @@ public sealed class Run : State
         _controls = controls;
     }
 
-    public override void Enter()
+    protected override void OnEnter()
         => ProcessMovement();
 
-    public override void Update(double delta)
+    protected override void OnUpdate(double delta)
     {
         if (_controls.JumpJustPressed() && Character.IsOnFloor())
         {

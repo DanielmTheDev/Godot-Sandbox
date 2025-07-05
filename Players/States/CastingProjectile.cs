@@ -19,7 +19,7 @@ public class CastingProjectile : State
         _spawnPoint = character.GetNode<Marker2D>("Visuals/ProjectileSpawnPoint");
     }
 
-    public override void Enter()
+    protected override void OnEnter()
     {
         var instance = Cast(_character);
         instance.OnLaunched += OnLaunched;
