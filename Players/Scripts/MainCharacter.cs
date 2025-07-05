@@ -8,19 +8,19 @@ namespace Sandbox.Players.Scripts;
 public partial class MainCharacter : CharacterBody2D
 {
     [Signal]
-    public delegate void PerformedAttackEventHandler(int currentStamina, int maxStamina);
+    public delegate void StaminaChangedEventHandler(int currentStamina, int maxStamina);
     [Export]
     public PackedScene Projectile = null!;
     [Export]
     public Player Player;
 
     public State CurrentState = null!;
+    internal readonly Stats Stats = new();
 
     private AnimationPlayer _animPlayer = null!;
     private InputProfile _controls = null!;
     private List<State> _states = null!;
     private Node2D _visuals = null!;
-    private readonly Stats _stats = new();
 
     public override void _Ready()
     {
@@ -38,7 +38,7 @@ public partial class MainCharacter : CharacterBody2D
             new Dead(_animPlayer, this),
             new CastingProjectile(Projectile, this)
         ];
-        HookUpSignals();
+        Stats.Stamina.Changed += stamina => EmitSignal(SignalName.StaminaChanged, stamina.Current, stamina.Max);
         CurrentState = _states.GetByName(StateName.Idle);
         SwitchState(StateName.Idle);
     }
@@ -51,15 +51,4 @@ public partial class MainCharacter : CharacterBody2D
     }
 
     public override void _PhysicsProcess(double delta) => CurrentState.Update(delta);
-
-    private void HookUpSignals()
-    {
-        _states.GetByName(StateName.Attacking).OnEntered += AdjustStamina;
-    }
-
-    private void AdjustStamina()
-    {
-        _stats.CurrentStamina -= 30;
-        EmitSignal(SignalName.PerformedAttack, _stats.CurrentStamina, _stats.MaxStamina);
-    }
 }

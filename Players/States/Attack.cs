@@ -15,9 +15,13 @@ public sealed class Attack : State
         _character = character;
     }
 
-
     protected override void OnEnter()
     {
+        if (!_character.Stats.Stamina.TrySpend(35))
+        {
+            return;
+        }
+
         _animPlayer.AnimationFinished += OnAnimationFinished;
         _animPlayer.Play("attack1");
     }

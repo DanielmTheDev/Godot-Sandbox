@@ -361,6 +361,3 @@ scale = Vector2(0.1, 0.1)
 Player = 2
 
 [node name="Hud" parent="." instance=ExtResource("6_i2041")]
-
-[connection signal="PerformedAttack" from="MainCharacter" to="Hud" method="AdjustPlayer1Stamina"]
-[connection signal="PerformedAttack" from="MainCharacter2" to="Hud" method="AdjustPlayer2Stamina"]
