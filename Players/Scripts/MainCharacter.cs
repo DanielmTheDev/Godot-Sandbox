@@ -7,17 +7,20 @@ namespace Sandbox.Players.Scripts;
 
 public partial class MainCharacter : CharacterBody2D
 {
+    [Signal]
+    public delegate void PerformedAttackEventHandler(int currentStamina, int maxStamina);
     [Export]
     public PackedScene Projectile = null!;
     [Export]
     public Player Player;
 
+    public State CurrentState = null!;
+
     private AnimationPlayer _animPlayer = null!;
     private InputProfile _controls = null!;
-
     private List<State> _states = null!;
-    public State CurrentState = null!;
     private Node2D _visuals = null!;
+    private readonly Stats _stats = new();
 
     public override void _Ready()
     {
@@ -29,12 +32,13 @@ public partial class MainCharacter : CharacterBody2D
         [
             new Idle(_animPlayer, _controls, this),
             new Run(_animPlayer, _visuals, _controls, this),
-            new Attack(_animPlayer, this), // subcribe to event here and emit signal here?
+            new Attack(_animPlayer, this),
             new Jump(_animPlayer, _controls, this),
             new Parry(_animPlayer, this),
             new Dead(_animPlayer, this),
             new CastingProjectile(Projectile, this)
         ];
+        HookUpSignals();
         CurrentState = _states.GetByName(StateName.Idle);
         SwitchState(StateName.Idle);
     }
@@ -47,4 +51,15 @@ public partial class MainCharacter : CharacterBody2D
     }
 
     public override void _PhysicsProcess(double delta) => CurrentState.Update(delta);
+
+    private void HookUpSignals()
+    {
+        _states.GetByName(StateName.Attacking).OnEntered += AdjustStamina;
+    }
+
+    private void AdjustStamina()
+    {
+        _stats.CurrentStamina -= 30;
+        EmitSignal(SignalName.PerformedAttack, _stats.CurrentStamina, _stats.MaxStamina);
+    }
 }

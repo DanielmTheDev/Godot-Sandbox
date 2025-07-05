@@ -5,7 +5,6 @@ namespace Sandbox.Players.States;
 
 public sealed class Attack : State
 {
-
     public override StateName StateName => StateName.Attacking;
     private readonly AnimationPlayer _animPlayer;
     private readonly MainCharacter _character;

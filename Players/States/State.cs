@@ -12,25 +12,25 @@ public abstract class State
     public State(MainCharacter character) => Character = character;
 
     public virtual void GetHit(Area2D area) => DefaultHitResponse.Handle(Character, area);
-    public event Action<State>? OnEntered;
-    public event Action<State>? OnExited;
-    public event Action<State>? OnUpdated;
+    public event Action? OnEntered;
+    public event Action? OnExited;
+    public event Action? OnUpdated;
 
     public void Enter()
     {
-        OnEntered?.Invoke(this);
+        OnEntered?.Invoke();
         OnEnter();
     }
 
     public void Exit()
     {
-        OnExited?.Invoke(this);
+        OnExited?.Invoke();
         OnExit();
     }
 
     public void Update(double delta)
     {
-        OnUpdated?.Invoke(this);
+        OnUpdated?.Invoke();
         OnUpdate(delta);
     }
 
